@@ -1,0 +1,53 @@
+:root {
+    --primary-color: #409EFF;
+    --primary-light: #ecf5ff;
+    --primary-dark: #337ecc;
+  }
+  
+  /* 全局按钮样式 */
+  .el-button--primary {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+  }
+  
+  .el-button--primary:hover {
+    background-color: var(--primary-dark);
+    border-color: var(--primary-dark);
+  }
+  
+  /* 全局链接样式 */
+  a {
+    color: var(--primary-color);
+  }
+  
+  a:hover {
+    color: var(--primary-dark);
+  }
+  
+  /* 全局卡片样式 */
+  .el-card {
+    border: 1px solid var(--primary-light);
+  }
+  
+  /* 全局标签样式 */
+  .el-tag {
+    background-color: var(--primary-light);
+    border-color: var(--primary-light);
+    color: var(--primary-color);
+  }
+  
+  /* 全局导航栏样式 */
+  .el-menu {
+    --el-menu-active-color: var(--primary-color);
+    --el-menu-hover-bg-color: var(--primary-light);
+  }
+  
+  /* 全局表格样式 */
+  .el-table {
+    --el-table-header-bg-color: var(--primary-light);
+  }
+  
+  /* 全局加载样式 */
+  .el-loading-spinner .path {
+    stroke: var(--primary-color);
+  }
