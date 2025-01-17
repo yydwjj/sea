@@ -6,7 +6,8 @@ import MerchantDetail from '../views/MerchantDetail.vue'
 const routes = [
   {
     path: '/',
-    redirect: '/home'
+    redirect: '/home',
+    component:() => import('@/views/Home.vue')
   },
   {
     path: '/home',
