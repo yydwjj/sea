@@ -4,16 +4,9 @@
   </el-config-provider>
 </template>
 
-<script >
+<script setup>
 import { ElConfigProvider } from 'element-plus'
 import zhCn from 'element-plus/dist/locale/zh-cn.mjs' // 中文语言包
-import HomeView from "./views/HomeView.vue";
-
-export default {
-  components: {
-    HomeView
-  }
-}
 </script>
 
 <style>
