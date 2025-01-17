@@ -10,4 +10,5 @@ export default defineConfig({
       '@': path.resolve(__dirname, './src'), // 确保 @ 指向 src 目录
     },
   },
+  base: 'https://yydwjj.github.io/sea/SeaProject/SeaProject/SeaShop/dist'
 })
