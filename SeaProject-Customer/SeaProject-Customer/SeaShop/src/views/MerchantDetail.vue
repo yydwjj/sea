@@ -232,6 +232,10 @@
   .info-content {
     padding: 0 8px;
   }
+
+  .info-content {
+    font-size: 18px;
+  }
   
   .rating-info {
     display: flex;
@@ -266,6 +270,7 @@
   
   .product-list {
     margin-bottom: 24px;
+    font-size: 14px;
   }
   
   .product-card {
@@ -318,6 +323,7 @@
   /* 添加新的样式 */
   .environment-section {
     margin-bottom: 24px;
+    font-size: 16px;
   }
   
   .monitor-video {

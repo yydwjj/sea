@@ -252,12 +252,20 @@ const router = useRouter()
   .merchant-info {
     flex: 1;
   }
+
+  .merchant-info h3{
+    font-size: 18px;
+  }
   
   .rating {
     display: flex;
     align-items: center;
     gap: 4px;
     margin: 4px 0;
+  }
+
+  .rating span {
+    font-size: 14px;
   }
   
   .distance {
