@@ -266,6 +266,9 @@ onMounted(() => {
     border-radius: 8px;
     box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
   }
+  .pk-module h3{
+    font-size: 18px;
+  }
 
   .product-header {
     display: flex;

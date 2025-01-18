@@ -117,6 +117,7 @@
     color: white;
     padding: 8px;
     text-align: center;
+    font-size: 16px;
   }
   
   .news-item {
@@ -129,6 +130,7 @@
   .news-item h3 {
     margin-bottom: 8px;
     color: #333;
+    font-size: 18px;
   }
   
   .news-item p {
