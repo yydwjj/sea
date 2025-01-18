@@ -17,4 +17,6 @@ for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
 app.use(router)
 app.use(ElementPlus)
 app.component('BottomNavigation',BottomNavigation)
-app.mount('#app')
+router.isReady().then(() => {
+    app.mount('#app')
+  })

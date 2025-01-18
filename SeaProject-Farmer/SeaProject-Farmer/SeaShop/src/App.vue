@@ -1,12 +1,14 @@
 <template>
   <el-config-provider :locale="zhCn">
     <router-view />
+    <BottomNavigation/>
   </el-config-provider>
 </template>
 
 <script setup>
 import { ElConfigProvider } from 'element-plus'
 import zhCn from 'element-plus/dist/locale/zh-cn.mjs' // 中文语言包
+import BottomNavigation from './components/BottomNavigation.vue';
 </script>
 
 <style>
