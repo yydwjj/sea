@@ -197,6 +197,7 @@
   .recipe-content {
     display: flex;
     gap: 12px;
+    font-size: 14px;
   }
   
   .recipe-image {

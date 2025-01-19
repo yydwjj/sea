@@ -87,7 +87,7 @@
   const nearbyStores = ref([
     {
       image: 'https://rjt666.github.io/sea/seastar.jpg',
-      name: '海洋之星...',
+      name: '海洋之星',
       description: '建设自1980...'
     },
     // ...更多商家数据
