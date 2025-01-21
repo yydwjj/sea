@@ -33,7 +33,7 @@
               <el-tag type="success">一级</el-tag>
             </el-descriptions-item>
             <el-descriptions-item label="检测机构">
-              水产平台监测中心
+                清渔监测中心
             </el-descriptions-item>
             <el-descriptions-item label="检测时间">
               2023-09-15
