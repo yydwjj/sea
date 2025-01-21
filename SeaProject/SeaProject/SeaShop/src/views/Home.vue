@@ -18,6 +18,9 @@
         <h2 class="section-title">热门商品推荐</h2>
         <el-carousel height="200px" indicator-position="outside">
           <el-carousel-item v-for="(item, index) in hotProducts" :key="index">
+            <router-link v-if="index === 0" :to="`/product/${item.id}`">
+              <img :src="item.image" class="carousel-image" />
+            </router-link>
             <img :src="item.image" class="carousel-image" />
             <div class="carousel-caption">{{ item.title }}</div>
           </el-carousel-item>
@@ -49,6 +52,7 @@
   // 热门商品数据
   const hotProducts = ref([
     {
+      id: 1, 
       image: 'https://rjt666.github.io/sea/home1.jpg',
       title: '青蟹'
     },
@@ -77,7 +81,9 @@
       description: '2023-2024年中国水产行业现状及消费趋势洞察报告...'
     }
   ])
-  </script>
+ 
+ 
+ </script>
   
   <style scoped>
   .home-container {

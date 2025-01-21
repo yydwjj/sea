@@ -95,6 +95,17 @@
             </div>
           </el-card>
         </el-col>
+
+        <!-- 水质检测 -->
+        <el-col :span="12">
+          <el-card class="card-item" @click="goToWaterQuality">
+            <div class="card-content">
+              <el-icon :size="40" color="#409EFF"><Compass /></el-icon>
+              <div class="card-title">水质检测</div>
+              <div class="card-desc">获得量化水质数据</div>
+            </div>
+          </el-card>
+        </el-col>
       </el-row>
     </el-main>
 
@@ -136,7 +147,8 @@ import {
   Document,
   Reading,
   TrendCharts,
-  Guide
+  Guide,
+  Compass
 } from '@element-plus/icons-vue'
 
 import { useRouter } from 'vue-router'
@@ -150,6 +162,9 @@ const goToMySupply = () => {
 }
 const navigateTo = (routeName) => {
   router.push({ name: routeName })
+}
+const goToWaterQuality = () =>{
+  router.push({name: 'water-quality'})
 }
 </script>
 

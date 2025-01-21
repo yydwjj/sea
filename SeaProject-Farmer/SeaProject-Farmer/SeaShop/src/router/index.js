@@ -3,6 +3,8 @@ import HomeView from '../views/HomeView.vue'
 import MySupplyView from '../views/MySupplyView.vue'
 import ProductDetail from '../views/ProductDetail.vue'
 import Mypage from '../views/Mypage.vue'
+import WaterQualityView from '../views/WaterQualityView.vue'
+
 
 const routes = [
   {
@@ -24,6 +26,11 @@ const routes = [
     path: '/profile',
     name: 'profile',
     component: Mypage
+  },
+  {
+    path: '/water-quality',
+    name: 'water-quality',
+    component: WaterQualityView
   },
   // 其他路由...
 ]
