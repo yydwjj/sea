@@ -28,7 +28,7 @@
 
     <!-- 第二个模块：折线图 -->
     <div class="chart-module">
-      <div class="chart-title">水质（指数）得分变化折线图</div>
+      <div class="chart-title">水质（指数）得分</div>
       <div class="chart-image">
         <img src="../assets/data1.png" alt="折线图" />
       </div>
@@ -217,17 +217,18 @@ watch(selectedDate, () => {
     margin-bottom: 60px;
     box-shadow: 7px 8px 2px 3px #c7e6f4;
   }
-  
+
   .chart-title {
     background-color: rgb(35, 125, 171);
     color: white;
     padding: 7px;
     border-radius: 8px;
-    font-size: 8px;
+    font-size: 9px;
     text-align: left;
     margin-bottom: 16px;
     height: 6px;
-    width: 33%;
+    width: 25%;
+    font-weight: 600;
   }
   
   .chart-image img {
