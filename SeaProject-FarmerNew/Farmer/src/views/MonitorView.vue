@@ -21,7 +21,7 @@
 import { ref } from 'vue';
 
 // 当前日期
-const currentDate = ref('2025/2/15');
+const currentDate = ref('2025/2/16');
 // 是否显示历史记录
 const showHistory = ref(false);
 // 视频数据，src 后期可替换为实际视频路径或地址

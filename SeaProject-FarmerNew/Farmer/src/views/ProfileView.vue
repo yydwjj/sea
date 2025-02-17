@@ -5,14 +5,14 @@
       <!-- 顶部区域 -->
       <div class="top-section">
         <div class="avatar-container">
-          <img src="../assets/avatar.png" alt="头像" class="avatar" />
+          <img src="../assets/avatar.jpg" alt="头像" class="avatar" />
         </div>
         <div class="user-name">XXXXXXX养殖户</div>
       </div>
 
       <!-- 中间区域 -->
       <div class="middle-section">
-        <img src="../assets/profile.png" alt="养殖环境" class="banner-image" />
+        <img src="../assets/profile.jpg" alt="养殖环境" class="banner-image" />
       </div>
 
       <!-- 底部功能区 -->
@@ -28,7 +28,9 @@
 
     <!-- 子页面 -->
     <div v-else>
-      <button class="back-button" @click="goBack">返回</button>
+      <button class="back-button" @click="goBack">
+        <svg xmlns="http://www.w3.org/2000/svg" width="2em" height="2em" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="3.6" d="m5 12l6-6m-6 6l6 6m-6-6h14"/></svg>
+      </button>
       <component :is="currentPage"></component>
     </div>
   </div>
@@ -43,6 +45,8 @@ import OrderManagement from './OrderManagement.vue';
 import SalesRecord from './SalesRecord.vue';
 import PaidPromotion from './PaidPromotion.vue';
 import Message from './Message.vue';
+import MyCustomerService from './MyCustomerService.vue';
+import MySettings from './MySettings.vue'; // 引入设置组件
 
 // 功能数据
 const functions = [
@@ -70,6 +74,12 @@ const showPage = (label) => {
       break;
     case '消息':
       currentPage.value = Message;
+      break;
+    case '我的客服':
+      currentPage.value = MyCustomerService;
+      break;
+    case '我的设置':
+      currentPage.value = MySettings;
       break;
     default:
       break;
@@ -183,26 +193,23 @@ const goBack = () => {
   position: absolute;
   top: 20px;
   left: 20px;
-  background-color: #007bff;
+  background-color: rgb(50, 161, 218);
   color: white;
   border: none;
-  padding: 8px 15px;
-  border-radius: 20px;
-  cursor: pointer;
-  font-size: 18px;
-  transition: background-color 0.3s ease-in-out;
-  background-color: rgb(50, 161, 218);
-    color: white;
-    border: none;
-    border-radius: 12px;
-    /* padding: 8px 16px; */
-    font-size: 14px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: background-color 0.3s;
+  padding: 2px 10px;
+  /* border-radius: 20px; */
+  /* cursor: pointer; */
+  /* font-size: 18px; */
+  /* background-color: rgb(50, 161, 218); */
+  /* color: white; */
+  /* border: none; */
+  border-radius: 12px;
+/* padding: 8px 16px; */
+/* font-size: 14px; */
+/* font-weight: 600; */
 }
 
 .back-button:hover {
-  background-color: #0056b3;
+background-color: #0056b3;
 }
 </style>
