@@ -6,19 +6,21 @@
         <Icon icon="mdi:magnify" />
       </div>
       <input
-        type="text"
-        class="search-input"
-        placeholder="搜索帖子"
+          type="text"
+          class="search-input"
+          placeholder="搜索帖子"
+          v-model="searchQuery"
+          @input="filterPosts"
       />
     </div>
 
     <!-- 标签切换区域 -->
     <div class="tab-container">
       <div
-        v-for="(tab, index) in tabs"
-        :key="index"
-        :class="['tab-item', { active: activeTab === index }]"
-        @click="changeTab(index)"
+          v-for="(tab, index) in tabs"
+          :key="index"
+          :class="['tab-item', { active: activeTab === index }]"
+          @click="changeTab(index)"
       >
         {{ tab }}
       </div>
@@ -27,10 +29,10 @@
     <!-- 帖子列表 -->
     <div class="post-list">
       <div
-        v-for="(post, index) in postList"
-        :key="index"
-        class="post-item"
-        @click="goToDetail(post)"
+          v-for="(post, index) in filteredPostList"
+          :key="index"
+          class="post-item"
+          @click="goToDetail(post)"
       >
         <img :src="post.image" :alt="post.title" class="post-image" />
         <div class="post-title">{{ post.title }}</div>
@@ -49,12 +51,14 @@ const router = useRouter();
 // 标签数据
 const tabs = ['关注', '发现', '绍兴'];
 const activeTab = ref(0); // 当前选中的标签
+const searchQuery = ref(''); // 搜索关键词
 
 // 切换标签
 const changeTab = (index) => {
   activeTab.value = index;
   // 根据标签加载对应的帖子列表
   postList.value = getPostsByTab(index);
+  filterPosts(); // 切换标签时重新过滤帖子
 };
 
 // 模拟帖子数据
@@ -257,6 +261,23 @@ const getPostsByTab = (index) => {
 
 // 当前显示的帖子列表
 const postList = ref(getPostsByTab(0));
+
+// 过滤帖子的函数
+const filterPosts = () => {
+  if (searchQuery.value.trim() === '') {
+    // 如果搜索框为空，显示当前标签下的所有帖子
+    filteredPostList.value = postList.value;
+  } else {
+    const keyword = searchQuery.value.toLowerCase();
+    // 根据标题和内容进行过滤
+    filteredPostList.value = postList.value.filter(post => {
+      return post.title.toLowerCase().includes(keyword) || post.content.toLowerCase().includes(keyword);
+    });
+  }
+};
+
+// 过滤后的帖子列表
+const filteredPostList = ref(postList.value);
 
 // 跳转到详情页
 const goToDetail = (post) => {
