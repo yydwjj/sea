@@ -205,7 +205,7 @@ showTodayData();
   .data-item {
     display: flex;
     justify-content: space-between;
-    padding: 8px;
+    padding: 8px 0px 8px 10px;
     /* background-color: white; */
     border-radius: 8px;
     align-items: center;
