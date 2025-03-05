@@ -32,7 +32,7 @@
           <img
               :src="img.src"
               :alt="img.alt"
-              @click="gotoProduct(img.targetIndex)"
+              @click="gotoProduct(img.targetId)"
               class="slide-image">
         </SwiperSlide>
 
@@ -77,9 +77,9 @@ import l3 from '../assets/l (3).jpg'
 
 
 const carouselImages = [
-  { src: l1, alt: '轮播图1', targetIndex: 0 },
-  { src: l2, alt: '轮播图2', targetIndex: 8 },
-  { src: l3, alt: '轮播图3', targetIndex: 7 }
+  { src: l1, alt: '轮播图1', targetId: 1 },
+  { src: l2, alt: '轮播图2', targetId: 2 },
+  { src: l3, alt: '轮播图3', targetId: 8 }
 ]
 
 const categories = [

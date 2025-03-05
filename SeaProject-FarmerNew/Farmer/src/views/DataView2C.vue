@@ -191,15 +191,15 @@ showTodayData();
   .data-module {
     background-color: rgb(199, 230, 244);
     border-radius: 12px;
-    padding: 16px;
+    padding: 12px 1px 13px 1px;
     margin-bottom: 16px;
     box-shadow: 7px 8px 7px 3px white;
   }
 
   .data-grid {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 12px;
+    grid-template-columns: repeat(2, 50%);
+    row-gap: 5px;
   }
 
   .data-item {

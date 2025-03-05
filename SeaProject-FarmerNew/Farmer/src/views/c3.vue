@@ -58,7 +58,7 @@
 import { ref } from 'vue';
 import { Icon } from '@iconify/vue'; // 引入 Iconify 图标组件
 import {useRouter} from "vue-router";
-import p1 from '../assets/l (1).jpg'
+import p1 from '../assets/p (11).jpg'
 import p2 from '../assets/p (2).jpg'
 import p3 from '../assets/p (3).jpg'
 import p4 from '../assets/p (4).jpg'

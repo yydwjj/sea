@@ -4,39 +4,185 @@
       <Icon icon="material-symbols:chevron-left-rounded" width="2em" />
     </button>
     <div class="cart-header">
-      <h2>采购车（2件）</h2>
-      <div class="total-price">总计：￥158.00</div>
+      <h2>采购车（{{ totalQuantity }}件）</h2>
+      <div class="total-price">总计：￥{{ totalPrice.toFixed(2) }}</div>
     </div>
 
     <div class="cart-items">
-      <!-- 静态数据示例 -->
-      <div class="cart-item">
-        <img src="../assets/l (1).jpg" class="product-image" />
+      <div class="cart-item" v-for="item in cartItems" :key="item.id">
+        <img :src="item.image" class="product-image" />
         <div class="product-info">
-          <h3>大闸蟹</h3>
-          <div class="price">￥45 / 斤 ×2</div>
+          <h3>{{ item.name }}</h3>
+          <div class="price">￥{{ item.price.split(' ')[0] }} / {{ item.price.split(' ')[2] }}</div>
+          <div class="quantity-control">
+            <button @click="updateQuantity(item.id, item.quantity - 1)" :disabled="item.quantity <= 1">-</button>
+            <input type="number" v-model.number="item.quantity" min="1" @change="updateCart(item.id, item.quantity)" />
+            <button @click="updateQuantity(item.id, item.quantity + 1)">+</button>
+          </div>
         </div>
-      </div>
-
-      <div class="cart-item">
-        <img src="../assets/p (8).jpg" class="product-image" />
-        <div class="product-info">
-          <h3>淡水小龙虾</h3>
-          <div class="price">￥25 / 斤 ×3</div>
-        </div>
+        <button class="remove-btn" @click="removeItem(item.id)">×</button>
       </div>
     </div>
 
     <button class="checkout-btn" @click="router.push('/checkout')">
-      去结算（￥158.00）
+      去结算（￥{{ totalPrice.toFixed(2) }}）
     </button>
   </div>
 </template>
 
 <script setup>
+import { ref, onMounted } from 'vue';  // 添加这行
 import { useRouter } from 'vue-router'
 import {Icon} from "@iconify/vue";
+
+import p1 from '../assets/p (11).jpg'
+import p2 from '../assets/p (2).jpg'
+import p3 from '../assets/p (3).jpg'
+import p4 from '../assets/p (4).jpg'
+import p5 from '../assets/p (5).jpg'
+import p6 from '../assets/p (6).jpg'
+import p7 from '../assets/p (7).jpg'
+import p8 from '../assets/p (8).jpg'
+import p9 from '../assets/p (9).jpg'
+import p10 from '../assets/p (10).jpg'
+import algae from '../assets/algae.png'
+
 const router = useRouter()
+
+
+const cartItems = ref([]);
+const totalPrice = ref(0);
+const totalQuantity = ref(0);
+
+const productList = ref([
+  {
+    id: 1,
+    image: p1,
+    name: '大闸蟹',
+    price: '45 / 斤',
+    evaluation: '良好' // 手动指定为优秀
+  },
+  {
+    id: 2,
+    image: p2,
+    name: '鲫鱼',
+    price: '15 / 斤',
+    evaluation: '优秀' // 手动指定为良好
+  },
+  {
+    id: 3,
+    image: p3,
+    name: '鲶鱼',
+    price: '18 / 斤',
+    evaluation: '优秀' // 手动指定为优秀
+  },
+  {
+    id: 4,
+    image: p4,
+    name: '黄鳝',
+    price: '30 / 斤',
+    evaluation: '良好' // 手动指定为良好
+  },
+  {
+    id: 5,
+    image: p5,
+    name: '中华草龟',
+    price: '50 / 只',
+    evaluation: '优秀' // 手动指定为优秀
+  },
+  {
+    id: 6,
+    image: algae,
+    name: '小球藻',
+    price: '20 / 斤',
+    evaluation: '优秀' // 手动指定为良好
+  },
+  {
+    id: 7,
+    image: p7,
+    name: '福寿螺(食用)',
+    price: '8 / 斤',
+    evaluation: '优秀' // 手动指定为优秀
+  },
+  {
+    id: 8,
+    image: p8,
+    name: '淡水小龙虾',
+    price: '25 / 斤',
+    evaluation: '优秀' // 手动指定为良好
+  },
+  {
+    id: 9,
+    image: p9,
+    name: '白鲢鱼',
+    price: '8 / 斤',
+    evaluation: '优秀' // 手动指定为优秀
+  },
+  {
+    id: 10,
+    image: p10,
+    name: '鳙鱼（胖头鱼）',
+    price: '13 / 斤',
+    evaluation: '良好' // 手动指定为良好
+  }
+]);
+
+// 获取购物车数据
+const getCartData = () => {
+  const cart = JSON.parse(localStorage.getItem('cart')) || {};
+  cartItems.value = Object.entries(cart).map(([id, quantity]) => {
+    const product = productList.value.find(p => p.id === Number(id));
+    return {
+      ...product,
+      quantity
+    };
+  });
+  
+  // 计算总价和总数量
+  totalPrice.value = cartItems.value.reduce((sum, item) => {
+    const price = Number(item.price.split(' ')[0]);
+    return sum + price * item.quantity;
+  }, 0);
+  
+  totalQuantity.value = cartItems.value.reduce((sum, item) => sum + item.quantity, 0);
+};
+
+// 初始化时获取数据
+onMounted(() => {
+  getCartData();
+});
+
+// 添加以下方法
+const updateQuantity = (id, newQuantity) => {
+  if (newQuantity < 1) return;
+  
+  // 更新本地数据
+  const item = cartItems.value.find(item => item.id === id);
+  if (item) {
+    item.quantity = newQuantity;
+  }
+  
+  // 更新localStorage
+  updateCart(id, newQuantity);
+};
+
+const updateCart = (id, quantity) => {
+  const cart = JSON.parse(localStorage.getItem('cart')) || {};
+  cart[id] = quantity;
+  localStorage.setItem('cart', JSON.stringify(cart));
+  
+  // 重新计算总价
+  getCartData();
+};
+
+const removeItem = (id) => {
+  const cart = JSON.parse(localStorage.getItem('cart')) || {};
+  delete cart[id];
+  localStorage.setItem('cart', JSON.stringify(cart));
+  
+  // 重新获取数据
+  getCartData();
+};
 </script>
 
 <style scoped>
@@ -131,5 +277,50 @@ const router = useRouter()
   border: none;
   border-radius: 8px;
   font-size: 16px;
+}
+.quantity-control {
+  display: flex;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.quantity-control button {
+  width: 30px;
+  height: 30px;
+  border: 1px solid #ddd;
+  background: #f5f5f5;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.quantity-control button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.quantity-control input {
+  width: 50px;
+  text-align: center;
+  border: 1px solid #ddd;
+  margin: 0 5px;
+  padding: 5px;
+  border-radius: 4px;
+}
+
+.remove-btn {
+  position: absolute;
+  right: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 24px;
+  color: #ff4757;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 5px;
+}
+
+.remove-btn:hover {
+  color: #ff6b81;
 }
 </style>

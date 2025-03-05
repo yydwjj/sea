@@ -86,7 +86,7 @@
   import { ref, onMounted } from 'vue';
   import { useRoute, useRouter } from 'vue-router';
   import { Icon } from '@iconify/vue'; // 引入 Iconify 图标组件
-  import p1 from '../assets/l (1).jpg'
+  import p1 from '../assets/p (11).jpg'
   import p2 from '../assets/p (2).jpg'
   import p3 from '../assets/p (3).jpg'
   import p4 from '../assets/p (4).jpg'
@@ -554,15 +554,6 @@ onMounted(() => {
       }
     },);
   }
-  // 加入采购车按钮点击事件
-  // const addToCart = () => {
-  //   console.log('加入采购车');
-  // };
-  //
-  // 立即购买按钮点击事件
-  // const buyNow = () => {
-  //   console.log('立即购买');
-  // };
 
   const cartItems = ref([])
   const showAdded = ref(false)
@@ -573,28 +564,53 @@ onMounted(() => {
 
   // 加入采购车逻辑增强
   const addToCart = () => {
+    // 获取当前商品id
+    const productId = Number(route.params.id);
+    
+    // 从localStorage获取购物车数据
+    let cart = JSON.parse(localStorage.getItem('cart')) || {};
+    
+    // 如果该商品已存在，数量+1，否则初始化为1
+    if (cart[productId]) {
+      cart[productId] += 1;
+    } else {
+      cart[productId] = 1;
+    }
+    
+    // 保存回localStorage
+    localStorage.setItem('cart', JSON.stringify(cart));
+
     // 按钮动画反馈
     const btn = document.querySelector('.add-to-cart-button')
     btn.style.transform = 'scale(0.95)'
     setTimeout(() => {
       btn.style.transform = 'scale(1)'
     }, 100)
-    router.push('/cart')
+    // router.push('/cart')
+    window.alert(`添加成功！`)
   }
 
   // 立即购买逻辑增强
-  const buyNow = () => {
+    const buyNow = () => {
+
+      // 获取当前商品id
+    const productId = Number(route.params.id);
+    
+    // 从localStorage获取购物车数据
+    let cart = JSON.parse(localStorage.getItem('cart')) || {};
+    
+    // 如果该商品已存在，数量+1，否则初始化为1
+    if (cart[productId]) {
+      cart[productId] += 1;
+    } else {
+      cart[productId] = 1;
+    }
+    
+    // 保存回localStorage
+    localStorage.setItem('cart', JSON.stringify(cart));
+    
     // 显示购买确认
     const confirmed = confirm(`确认购买 ${currentProduct.value.name}？`)
-    // if (confirmed) {
-    //   router.push({
-    //     name: 'OrderConfirm',
-    //     query: {
-    //       productId: route.params.index,
-    //       quantity: 1
-    //     }
-    //   })
-    // }
     router.push('/checkout') // 直接跳转不处理数据
   }
   </script>

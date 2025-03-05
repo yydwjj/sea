@@ -18,21 +18,14 @@
       </div>
     </div>
 
-    <!-- 静态订单 -->
+    <!-- 动态订单 -->
     <div class="products-section">
       <div class="section-title">采购清单</div>
-      <div class="product-item">
-        <img src="../assets/l (1).jpg" class="product-image" />
+      <div class="product-item" v-for="item in cartItems" :key="item.id">
+        <img :src="item.image" class="product-image" />
         <div class="product-info">
-          <h3>大闸蟹</h3>
-          <div class="spec">￥45 / 斤 ×2</div>
-        </div>
-      </div>
-      <div class="product-item">
-        <img src="../assets/p (8).jpg" class="product-image" />
-        <div class="product-info">
-          <h3>淡水小龙虾</h3>
-          <div class="spec">￥25 / 斤 ×3</div>
+          <h3>{{ item.name }}</h3>
+          <div class="spec">￥{{ item.price }} / 斤 ×{{ item.quantity }}</div>
         </div>
       </div>
     </div>
@@ -40,16 +33,130 @@
     <!-- 提交订单 -->
     <div class="submit-section">
       <button class="submit-btn" @click="router.push('/order-result')">
-        提交订单（￥158.00）
+        提交订单（￥{{ totalPrice.toFixed(2) }}）
       </button>
     </div>
   </div>
 </template>
 
 <script setup>
+import { ref, onMounted } from 'vue';  // 添加这行
 import { useRouter } from 'vue-router'
 import { Icon } from '@iconify/vue'; // 引入 Iconify 图标组件
-const router = useRouter()
+
+import p1 from '../assets/p (11).jpg'
+import p2 from '../assets/p (2).jpg'
+import p3 from '../assets/p (3).jpg'
+import p4 from '../assets/p (4).jpg'
+import p5 from '../assets/p (5).jpg'
+import p6 from '../assets/p (6).jpg'
+import p7 from '../assets/p (7).jpg'
+import p8 from '../assets/p (8).jpg'
+import p9 from '../assets/p (9).jpg'
+import p10 from '../assets/p (10).jpg'
+import algae from '../assets/algae.png'
+
+
+
+const router = useRouter();
+const cartItems = ref([]);
+const totalPrice = ref(0);
+
+const getCartData = () => {
+  const cart = JSON.parse(localStorage.getItem('cart')) || {};
+  
+  const productList = [
+  {
+    id: 1,
+    image: p1,
+    name: '大闸蟹',
+    price: '45 ',
+    evaluation: '良好' // 手动指定为优秀
+  },
+  {
+    id: 2,
+    image: p2,
+    name: '鲫鱼',
+    price: '15',
+    evaluation: '优秀' // 手动指定为良好
+  },
+  {
+    id: 3,
+    image: p3,
+    name: '鲶鱼',
+    price: '18',
+    evaluation: '优秀' // 手动指定为优秀
+  },
+  {
+    id: 4,
+    image: p4,
+    name: '黄鳝',
+    price: '30',
+    evaluation: '良好' // 手动指定为良好
+  },
+  {
+    id: 5,
+    image: p5,
+    name: '中华草龟',
+    price: '50 ',
+    evaluation: '优秀' // 手动指定为优秀
+  },
+  {
+    id: 6,
+    image: algae,
+    name: '小球藻',
+    price: '20 ',
+    evaluation: '优秀' // 手动指定为良好
+  },
+  {
+    id: 7,
+    image: p7,
+    name: '福寿螺(食用)',
+    price: '8 ',
+    evaluation: '优秀' // 手动指定为优秀
+  },
+  {
+    id: 8,
+    image: p8,
+    name: '淡水小龙虾',
+    price: '25 ',
+    evaluation: '优秀' // 手动指定为良好
+  },
+  {
+    id: 9,
+    image: p9,
+    name: '白鲢鱼',
+    price: '8 ',
+    evaluation: '优秀' // 手动指定为优秀
+  },
+  {
+    id: 10,
+    image: p10,
+    name: '鳙鱼（胖头鱼）',
+    price: '13 ',
+    evaluation: '良好' // 手动指定为良好
+  }
+];
+
+  cartItems.value = Object.entries(cart).map(([id, quantity]) => {
+    const product = productList.find(p => p.id === Number(id));
+    return {
+      ...product,
+      quantity
+    };
+  });
+  
+  // 计算总价
+  totalPrice.value = cartItems.value.reduce((sum, item) => {
+    const price = Number(item.price);
+    return sum + price * item.quantity;
+  }, 0);
+};
+
+// 初始化时获取数据
+onMounted(() => {
+  getCartData();
+});
 </script>
 
 <style scoped>
