@@ -7,7 +7,7 @@
     <div v-if="!showHistory" class="video-list">
       <div v-for="(video, index) in videos" :key="index" class="video-item">
         <span class="video-name">水域{{ index + 1 }}</span>
-        <video :src="video.src" alt="水域视频" class="video-img" />
+        <video :src="video.src" alt="水域视频" class="video-img" controls autoplay/>
       </div>
     </div>
     <div v-if="showHistory" class="history-content">
@@ -19,6 +19,8 @@
 
 <script setup>
 import { ref } from 'vue';
+import f1 from '../assets/f1.mp4'
+import f2 from '../assets/f2.mp4'
 
 // 当前日期
 const currentDate = ref('2025/2/16');
@@ -26,8 +28,8 @@ const currentDate = ref('2025/2/16');
 const showHistory = ref(false);
 // 视频数据，src 后期可替换为实际视频路径或地址
 const videos = ref([
-  { src: 'https://yydwjj.github.io/-----/f1.mp4' },
-  { src: 'https://yydwjj.github.io/-----/f2.mp4' }
+  { src: f1},
+  { src: f2 },
 ]);
 </script>
 

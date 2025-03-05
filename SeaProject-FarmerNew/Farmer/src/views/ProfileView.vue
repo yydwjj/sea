@@ -7,7 +7,7 @@
         <div class="avatar-container">
           <img src="../assets/avatar.jpg" alt="头像" class="avatar" />
         </div>
-        <div class="user-name">XXXXXXX养殖户</div>
+        <div class="user-name">{{ userName }}</div> <!-- 动态显示用户名称 -->
       </div>
 
       <!-- 中间区域 -->
@@ -18,7 +18,7 @@
       <!-- 底部功能区 -->
       <div class="bottom-section">
         <div class="function-grid">
-          <div v-for="(func, index) in functions" :key="index" class="function-item" @click="showPage(func.label)">
+          <div v-for="(func, index) in filteredFunctions" :key="index" class="function-item" @click="showPage(func.label)">
             <Icon :icon="func.icon" class="function-icon" />
             <div class="function-label">{{ func.label }}</div>
           </div>
@@ -38,7 +38,8 @@
 
 <script setup>
 import { Icon } from '@iconify/vue'; // 引入 Iconify 图标组件
-import { ref } from 'vue';
+import { ref, computed } from 'vue';
+import { useUserStore } from '../stores/userStore'; // 引入全局状态
 
 // 引入子页面组件
 import OrderManagement from './OrderManagement.vue';
@@ -46,7 +47,24 @@ import SalesRecord from './SalesRecord.vue';
 import PaidPromotion from './PaidPromotion.vue';
 import Message from './Message.vue';
 import MyCustomerService from './MyCustomerService.vue';
-import MySettings from './MySettings.vue'; // 引入设置组件
+import MySettings from './MySettings.vue';
+import MyRights from "./MyRights.vue"; // 引入设置组件
+
+const userStore = useUserStore();
+
+// 动态用户名称
+const userName = computed(() => {
+  // return userStore.isFamer ? 'XXXXXXX养殖户' : 'XXXXXXX批发商';
+  let result;
+  if (userStore.isCustomer){
+    result = "xxxxxxx消费者"
+  }else if(userStore.isFamer){
+    result = "xxxxxxx养殖户"
+  } else if (userStore.isWholesalers){
+    result = "xxxxxxx批发商"
+  }
+  return result
+});
 
 // 功能数据
 const functions = [
@@ -57,6 +75,33 @@ const functions = [
   { icon: 'mdi:headset', label: '我的客服' },
   { icon: 'mdi:cog', label: '我的设置' },
 ];
+
+// 根据 isCustomer 过滤功能数据
+const filteredFunctions = computed(() => {
+  // return userStore.isFamer
+  //   ? functions
+  //   : functions.filter((func) => func.label !== '付费推广') // 隐藏付费推广;
+  if(userStore.isFamer){
+    return [
+      { icon: 'mdi:cart', label: '订单管理' },
+      { icon: 'mdi:chart-line', label: '销售记录' },
+      { icon: 'mdi:bullhorn', label: '付费推广' },
+      { icon: 'mdi:message', label: '消息' },
+      { icon: 'mdi:headset', label: '我的客服' },
+      { icon: 'mdi:cog', label: '我的设置' },
+    ]
+  }else if(userStore.isWholesalers){
+    return functions.filter((func) => func.label !== '付费推广') // 隐藏付费推广;
+  }else{
+    return [
+      { icon: 'mdi:cart', label: '我的订单' },
+      { icon: 'mdi:chart-line', label: '我的权益' },
+      { icon: 'mdi:message', label: '消息' },
+      { icon: 'mdi:headset', label: '我的客服' },
+      { icon: 'mdi:cog', label: '我的设置' },
+    ]
+  }
+});
 
 // 当前显示的页面
 const currentPage = ref(null);
@@ -80,6 +125,12 @@ const showPage = (label) => {
       break;
     case '我的设置':
       currentPage.value = MySettings;
+      break;
+    case '我的订单':
+      currentPage.value = OrderManagement;
+      break;
+    case '我的权益':
+      currentPage.value = MyRights;
       break;
     default:
       break;
@@ -191,9 +242,9 @@ const goBack = () => {
 
 .back-button {
   position: absolute;
-  top: 20px;
-  left: 20px;
-  background-color: rgb(50, 161, 218);
+  top: 9px;
+  left: 7px;
+  background-color: rgb(108 201 249);
   color: white;
   border: none;
   padding: 2px 10px;
@@ -204,9 +255,10 @@ const goBack = () => {
   /* color: white; */
   /* border: none; */
   border-radius: 12px;
-/* padding: 8px 16px; */
-/* font-size: 14px; */
-/* font-weight: 600; */
+  /* padding: 8px 16px; */
+  /* font-size: 14px; */
+  /* font-weight: 600; */
+  z-index: 10;
 }
 
 .back-button:hover {

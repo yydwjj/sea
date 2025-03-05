@@ -9,18 +9,42 @@
     </div>
     <div v-if="showHistory" class="history-content">
       <!-- 这里可以进一步添加历史记录的具体展示逻辑，目前只是简单占位 -->
-      <p>历史记录内容待展示</p>
+      <p v-if="loading">加载中...</p>
+      <p v-else-if="error">{{ error }}</p>
+      <pre v-else>{{ apiData }}</pre>
     </div>
   </div>
 </template>
 
 <script setup>
-import { ref } from 'vue';
+import { ref, onMounted } from 'vue';
+import { getTestData } from '../api.js';
 
 // 当前日期
 const currentDate = ref('2025/2/16');
 // 是否显示历史记录
 const showHistory = ref(false);
+// 存储 API 数据
+const apiData = ref(null);
+// 加载状态
+const loading = ref(true);
+// 错误信息
+const error = ref(null);
+
+const fetchData = async () => {
+  try {
+    const response = await getTestData();
+    apiData.value = response.data;
+  } catch (err) {
+    error.value = err.message;
+  } finally {
+    loading.value = false;
+  }
+};
+
+onMounted(() => {
+  fetchData();
+});
 </script>
 
 <style scoped>

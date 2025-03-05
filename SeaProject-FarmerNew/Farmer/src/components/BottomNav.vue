@@ -1,54 +1,74 @@
 <template>
-    <div class="bottom-nav">
-      <div
-        v-for="(nav, index) in navList"
-        :key="index"
-        :class="['nav-item', { active: activeIndex === index }]"
-        @click="changeNav(nav.path)"
-      >
-        <div class="nav-icon">
-          <Icon :icon="nav.icon" />
-        </div>
-        <div class="nav-text">{{ nav.text }}</div>
+  <div class="bottom-nav">
+    <div
+      v-for="(nav, index) in navList"
+      :key="index"
+      :class="['nav-item', { active: activeIndex === index }]"
+      @click="changeNav(nav.path)"
+    >
+      <div class="nav-icon">
+        <Icon :icon="nav.icon" width="2em" height="2em" />
       </div>
+      <div class="nav-text">{{ nav.text }}</div>
     </div>
-  </template>
-  
-  <script setup>
-  import { ref, watch } from 'vue';
-  import { useRouter, useRoute } from 'vue-router'; // 引入路由相关方法
-  import { Icon } from '@iconify/vue'; // 引入 Iconify 组件
-  
-  const router = useRouter(); // 获取路由实例
-  const route = useRoute(); // 获取当前路由信息
-  
-  // 导航数据
-  const navList = [
-    { text: '养殖监测', icon: 'bx:cctv', path: '/detection' }, // 监控图标
-    { text: '商品发布', icon: 'mdi:plus-circle-outline', path: '/product' }, // 圆圈加号图标
-    { text: '社群分享', icon: 'mdi:message-outline', path: '/community' }, // 聊天气泡图标
-    { text: '我的信息', icon: 'mdi:account-outline', path: '/profile' }, // 用户图标
-  ];
-  
-  const activeIndex = ref(0);
-  
-  // 监听路由变化，更新 activeIndex
-  watch(
-    () => route.path,
-    (newPath) => {
-      const index = navList.findIndex((nav) => nav.path === newPath);
-      if (index !== -1) {
-        activeIndex.value = index;
-      }
-    },
-    { immediate: true }
-  );
-  
-  // 切换导航
-  const changeNav = (path) => {
-    router.push(path); // 跳转到对应路由
-  };
-  </script>
+  </div>
+</template>
+
+<script setup>
+import { ref, watch, computed } from 'vue';
+import { useRouter, useRoute } from 'vue-router';
+import { Icon } from '@iconify/vue';
+import { useUserStore } from '../stores/userStore'; // 引入全局状态
+
+const router = useRouter();
+const route = useRoute();
+const userStore = useUserStore();
+
+// 根据 isCustomer 动态生成导航数据
+const navList = computed(() => {
+  if(userStore.isFamer){
+    return [
+          { text: '养殖监测', icon: 'bx:cctv', path: '/detection' },
+          { text: '商品发布', icon: 'mdi:plus-circle-outline', path: '/product' },
+          { text: '社群分享', icon: 'mdi:message-outline', path: '/community' },
+          { text: '我的信息', icon: 'mdi:account-outline', path: '/profile' },
+        ]
+  } else if (userStore.isWholesalers){
+    return  [
+          { text: '商品采购', icon: 'material-symbols:storefront-outline', path: '/purchase' },
+          { text: '商品发布', icon: 'mdi:plus-circle-outline', path: '/product' },
+          { text: '社群分享', icon: 'mdi:message-outline', path: '/community' },
+          { text: '我的信息', icon: 'mdi:account-outline', path: '/profile' },
+        ]
+  }else if (userStore.isCustomer){
+    return [
+      { text: '首页', icon: 'ci:house-01', path: '/home' }, //home需要创建
+      { text: '商品采购', icon: 'material-symbols:storefront-outline', path: '/purchase' },
+      { text: '社群分享', icon: 'mdi:message-outline', path: '/community' },
+      { text: '我的信息', icon: 'mdi:account-outline', path: '/profile' },
+    ]
+  }
+});
+
+const activeIndex = ref(0);
+
+// 监听路由变化，更新 activeIndex
+watch(
+  () => route.path,
+  (newPath) => {
+    const index = navList.value.findIndex((nav) => nav.path === newPath);
+    if (index !== -1) {
+      activeIndex.value = index;
+    }
+  },
+  { immediate: true }
+);
+
+// 切换导航
+const changeNav = (path) => {
+  router.push(path);
+};
+</script>
   
   <style scoped>
   .bottom-nav {

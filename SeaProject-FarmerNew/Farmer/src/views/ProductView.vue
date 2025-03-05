@@ -111,6 +111,16 @@
 <script setup>
 import { ref } from 'vue';
 import { Icon } from '@iconify/vue'; // 引入 Iconify 图标组件
+import p1 from '../assets/p (1).jpg'
+import p2 from '../assets/p (2).jpg'
+import p3 from '../assets/p (3).jpg'
+import p4 from '../assets/p (4).jpg'
+import p5 from '../assets/p (5).jpg'
+import p6 from '../assets/p (6).jpg'
+import p7 from '../assets/p (7).jpg'
+import p8 from '../assets/p (8).jpg'
+import p9 from '../assets/p (9).jpg'
+import p10 from '../assets/p (10).jpg'
 
 // 标签数据
 const tabs = ['已上架', '未上架'];
@@ -138,69 +148,69 @@ const changeTab = (index) => {
 
 // 淡水产品数据
 const listedProducts = [
- {
-   image: 'https://yydwjj.github.io/-----/p (1).jpg',
-    name: '草鱼',
-    price: '12 / 斤',
-    description: '肉质鲜嫩，适合红烧、清蒸，是常见的淡水食用鱼。',
-  },
-  {
-    image: 'https://yydwjj.github.io/-----/p (2).jpg',
-    name: '鲫鱼',
-    price: '15 / 斤',
-    description: '营养丰富，适合炖汤，汤汁鲜美。',
-  },
-  {
-    image: 'https://yydwjj.github.io/-----/p (3).jpg',
-    name: '鲶鱼',
-    price: '18 / 斤',
-    description: '肉质细腻，刺少，适合红烧、做酸菜鱼。',
-  },
-  {
-    image: 'https://yydwjj.github.io/-----/p (4).jpg',
-    name: '黄鳝',
-    price: '30 / 斤',
-    description: '富含蛋白质和多种维生素，可红烧、炖汤。',
-  },
-  {
-    image: 'https://yydwjj.github.io/-----/p (5).jpg',
-    name: '中华草龟',
-    price: '50 / 只',
-    description: '可食用也可作为观赏龟，龟肉营养丰富。',
-  },
+  {
+    image: p1,
+    name: '草鱼',
+    price: '12 / 斤',
+    description: '肉质鲜嫩，适合红烧、清蒸，是常见的淡水食用鱼。',
+  },
+  {
+    image: p2,
+    name: '鲫鱼',
+    price: '15 / 斤',
+    description: '营养丰富，适合炖汤，汤汁鲜美。',
+  },
+  {
+    image: p3,
+    name: '鲶鱼',
+    price: '18 / 斤',
+    description: '肉质细腻，刺少，适合红烧、做酸菜鱼。',
+  },
+  {
+    image: p4,
+    name: '黄鳝',
+    price: '30 / 斤',
+    description: '富含蛋白质和多种维生素，可红烧、炖汤。',
+  },
+  {
+    image: p5,
+    name: '中华草龟',
+    price: '50 / 只',
+    description: '可食用也可作为观赏龟，龟肉营养丰富。',
+  },
 ];
 
 const unlistedProducts = [
-  {
-    image: 'https://yydwjj.github.io/-----/p (6).jpg',
-    name: '泥鳅',
-    price: '20 / 斤',
-    description: '具有一定的药用价值，适合炖汤、红烧。',
-  },
-  {
-    image: 'https://yydwjj.github.io/-----/p (7).jpg',
-    name: '福寿螺（食用级）',
-    price: '8 / 斤',
-    description: '经过严格处理可食用，肉质紧实。',
-  },
-  {
-    image: 'https://yydwjj.github.io/-----/p (8).jpg',
-    name: '淡水小龙虾',
-    price: '25 / 斤',
-    description: '味道鲜美，是夏季热门美食，适合麻辣、十三香等口味。',
-  },
-  {
-    image: 'https://yydwjj.github.io/-----/p (9).jpg',
-    name: '白鲢鱼',
-    price: '8 / 斤',
-    description: '价格实惠，可制作鱼丸、红烧等。',
-  },
-  {
-    image: 'https://yydwjj.github.io/-----/p (10).jpg',
-    name: '鳙鱼（胖头鱼）',
-    price: '13 / 斤',
-    description: '鱼头大而鲜美，适合做鱼头汤、剁椒鱼头。',
-  },
+{
+    image: p6,
+    name: '泥鳅',
+    price: '20 / 斤',
+    description: '具有一定的药用价值，适合炖汤、红烧。',
+  },
+  {
+    image: p7,
+    name: '福寿螺（食用级）',
+    price: '8 / 斤',
+    description: '经过严格处理可食用，肉质紧实。',
+  },
+  {
+    image: p8,
+    name: '淡水小龙虾',
+    price: '25 / 斤',
+    description: '味道鲜美，是夏季热门美食，适合麻辣、十三香等口味。',
+  },
+  {
+    image: p9,
+    name: '白鲢鱼',
+    price: '8 / 斤',
+    description: '价格实惠，可制作鱼丸、红烧等。',
+  },
+  {
+    image: p10,
+    name: '鳙鱼（胖头鱼）',
+    price: '13 / 斤',
+    description: '鱼头大而鲜美，适合做鱼头汤、剁椒鱼头。',
+  },
 ];
 
 
@@ -331,7 +341,7 @@ const cancelAddProduct = () => {
   width: 45%;
   height: 14px;
   align-items: center;
-  margin-bottom: 20px;
+  margin-bottom: 26px;
 }
 
 .tab-item {
@@ -363,7 +373,7 @@ const cancelAddProduct = () => {
   background-color: white;
   border-radius: 12px;
   padding: 16px;
-  box-shadow: 0px 0px 8px 18px rgb(199, 230, 244);
+  box-shadow: 0px 0px 8px 6px rgb(199, 230, 244);
 }
 
 .product-image {
