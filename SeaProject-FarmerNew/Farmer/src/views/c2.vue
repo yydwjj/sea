@@ -286,7 +286,7 @@ const goToProductDetail = (index) => {
 }
 
 .evaluation-excellent {
-  background-color: rgb(18, 247, 108);
+  background-color: rgb(0,208,68);
 }
 
 .evaluation-excellent.evaluation-strip {
