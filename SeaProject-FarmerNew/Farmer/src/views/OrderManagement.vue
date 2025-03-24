@@ -1,41 +1,62 @@
 <template>
   <div class="settings-view">
     <h2 class="settings-title">订单</h2>
-    <div class="setting-option">
+    <template v-if="userStore.isFamer">
+    <div class="setting-option" @click="router.push({ name: 'MyCustomers' })">
       <div class="option-icon">
-        <Icon icon="mdi:cash-clock" />  <!-- 现金时钟表示待付款 -->
+        <Icon icon="mdi:account-group" />
+      </div>
+      <div class="option-label">我的顾客</div>
+    </div>
+    <div class="setting-option" @click="router.push({ name: 'CustomerOrders' })">
+      <div class="option-icon">
+        <Icon icon="mdi:clipboard-list" />
+      </div>
+      <div class="option-label">顾客订单</div>
+    </div>
+  </template>
+  <template v-else>
+    <div class="setting-option" @click="router.push({ name: 'PendingPayment' })">
+      <div class="option-icon">
+        <Icon icon="mdi:cash-clock" />
       </div>
       <div class="option-label">待付款</div>
     </div>
-    <div class="setting-option">
+    <div class="setting-option" @click="router.push({ name: 'PendingShipment' })">
       <div class="option-icon">
-        <Icon icon="mdi:package-variant-closed" />  <!-- 未打开的包裹表示待发货 -->
+        <Icon icon="mdi:package-variant-closed" />
       </div>
       <div class="option-label">待发货</div>
     </div>
-    <div class="setting-option">
+    <div class="setting-option" @click="router.push({ name: 'PendingReceipt' })">
       <div class="option-icon">
-        <Icon icon="mdi:truck-delivery" />  <!-- 运输卡车表示待收货 -->
+        <Icon icon="mdi:truck-delivery" />
       </div>
       <div class="option-label">待收货</div>
     </div>
-    <div class="setting-option">
+    <div class="setting-option" @click="router.push({ name: 'PendingReview' })">
       <div class="option-icon">
-        <Icon icon="mdi:comment-text-outline" />  <!-- 对话气泡表示待评价 -->
+        <Icon icon="mdi:comment-text-outline" />
       </div>
       <div class="option-label">待评价</div>
     </div>
-    <div class="setting-option">
+    <div class="setting-option" @click="router.push({ name: 'RefundService' })">
       <div class="option-icon">
-        <Icon icon="mdi:shield-refresh" />  <!-- 盾牌刷新表示退款售后 -->
+        <Icon icon="mdi:shield-refresh" />
       </div>
       <div class="option-label">退款售后</div>
     </div>
+  </template>
   </div>
 </template>
 
 <script setup>
 import { Icon } from '@iconify/vue';
+import { useUserStore } from '../stores/userStore';
+import { useRouter, useRoute } from 'vue-router';
+
+const userStore = useUserStore();
+const router = useRouter();
 </script>
 
 <style scoped>

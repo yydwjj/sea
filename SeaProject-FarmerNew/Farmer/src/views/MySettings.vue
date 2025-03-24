@@ -1,6 +1,6 @@
 <template>
   <div class="settings-view">
-    <h2 class="settings-title">设置</h2>
+    <h2 class="settings-title">请选择端口</h2>
     <div class="setting-option" @click="switchToCustomer">
       <div class="option-icon">
         <Icon icon="mdi:account" />
@@ -25,21 +25,29 @@
 <script setup>
 import { Icon } from '@iconify/vue';
 import { useUserStore } from '../stores/userStore'; // 引入全局状态
+import { useRouter } from 'vue-router';
 
 const userStore = useUserStore();
+const router = useRouter();
 
 const switchToCustomer = () => {
   userStore.switchToCustomer();
   console.log('已切换到顾客端');
+  router.push('/home'); // 跳转到/home
 };
 
 const switchToWholesaler = () => {
   userStore.switchToWholesaler();
   console.log('已切换到批发商端');
+  window.alert("本程序为演示程序，实际批发商端需审核通过后才可进入")
+  router.push('/purchase'); // 跳转到/purchase
 };
 
 const switchToFamer = () =>{
   userStore.switchToFamer();
+  window.alert("本程序为演示程序，实际养殖户端需审核通过后才可进入")
+  router.push('/detection'); // 跳转到/detection
+
 }
 </script>
 
@@ -52,6 +60,8 @@ const switchToFamer = () =>{
   background-color: rgb(236, 247, 253);
   min-height: 70vh;
   justify-content: space-evenly;
+  max-width: 90vw;
+  box-shadow: rgb(236, 247, 253) 0px 20px 0 199px;
 }
 
 .settings-title {
@@ -69,7 +79,7 @@ const switchToFamer = () =>{
   border-radius: 12px;
   margin-bottom: 16px;
   cursor: pointer;
-  width: 112%;
+  width: 300px;
   max-width: 400px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   transition: box-shadow 0.3s ease-in-out;

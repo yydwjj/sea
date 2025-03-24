@@ -43,7 +43,7 @@
             />
             <input
               type="text"
-              v-model="product.price"
+              v-model="product.price1"
               class="edit-input"
             />
             <textarea
@@ -57,7 +57,7 @@
           </template>
           <template v-else>
             <div class="product-name">{{ product.name }}</div>
-            <div class="product-price">{{ product.price }}</div>
+            <div class="product-price">{{ displayPrice(product) }}</div>
             <div class="product-description">{{ product.description }}</div>
             <button class="edit-button" @click="startEdit(product)">编辑</button>
           </template>
@@ -111,6 +111,8 @@
 <script setup>
 import { ref } from 'vue';
 import { Icon } from '@iconify/vue'; // 引入 Iconify 图标组件
+import { useUserStore } from '../stores/userStore';
+
 import p1 from '../assets/p (1).jpg'
 import p2 from '../assets/p (2).jpg'
 import p3 from '../assets/p (3).jpg'
@@ -121,6 +123,15 @@ import p7 from '../assets/p (7).jpg'
 import p8 from '../assets/p (8).jpg'
 import p9 from '../assets/p (9).jpg'
 import p10 from '../assets/p (10).jpg'
+import p11 from '../assets/p (11).jpg'
+import p12 from '../assets/p (12).jpg'
+import p13 from '../assets/p (13).jpg'
+import p14 from '../assets/p (14).jpg'
+
+const userStore = useUserStore();
+const displayPrice = (product) => {
+  return userStore.isFamer ? product.price1 : product.price2;
+};
 
 // 标签数据
 const tabs = ['已上架', '未上架'];
@@ -146,71 +157,108 @@ const changeTab = (index) => {
   filterProducts();
 };
 
-// 淡水产品数据
 const listedProducts = [
-  {
+{
     image: p1,
     name: '草鱼',
-    price: '12 / 斤',
-    description: '肉质鲜嫩，适合红烧、清蒸，是常见的淡水食用鱼。',
+    price1: '12.48 / 斤', 
+    price2: '22.81 / 斤',
+    description: '肉质鲜嫩的草鱼佳品'
   },
   {
     image: p2,
-    name: '鲫鱼',
-    price: '15 / 斤',
-    description: '营养丰富，适合炖汤，汤汁鲜美。',
+    name: '鲢鱼',
+    price1: '9.36 / 斤', 
+    price2: '17.1 / 斤',
+    description: '美味实惠的鲢鱼选择'
   },
   {
     image: p3,
-    name: '鲶鱼',
-    price: '18 / 斤',
-    description: '肉质细腻，刺少，适合红烧、做酸菜鱼。',
+    name: '鳙鱼',
+    price1: '10.92 / 斤', 
+    price2: '19.96 / 斤',
+    description: '营养丰富的鳙鱼食材'
   },
   {
     image: p4,
-    name: '黄鳝',
-    price: '30 / 斤',
-    description: '富含蛋白质和多种维生素，可红烧、炖汤。',
+    name: '鲤鱼',
+    price1: '14.04 / 斤', 
+    price2: '25.67 / 斤',
+    description: '口感鲜美的鲤鱼之选'
   },
   {
     image: p5,
-    name: '中华草龟',
-    price: '50 / 只',
-    description: '可食用也可作为观赏龟，龟肉营养丰富。',
+    name: '鲫鱼',
+    price1: '15.6 / 斤', 
+    price2: '28.51 / 斤',
+    description: '炖汤佳品的鲫鱼美味'
+  },
+  {
+    image: p6,
+    name: '鲶鱼',
+    price1: '14.56 / 斤', 
+    price2: '26.57 / 斤',
+    description: '嫩滑可口的鲶鱼美食'
+  },
+  {
+    image: p7,
+    name: '青虾',
+    price1: '32.1 / 斤', 
+    price2: '57.02 / 斤',
+    description: '新鲜清甜的青虾盛宴'
   },
 ];
 
 const unlistedProducts = [
 {
-    image: p6,
-    name: '泥鳅',
-    price: '20 / 斤',
-    description: '具有一定的药用价值，适合炖汤、红烧。',
-  },
-  {
-    image: p7,
-    name: '福寿螺（食用级）',
-    price: '8 / 斤',
-    description: '经过严格处理可食用，肉质紧实。',
-  },
-  {
     image: p8,
-    name: '淡水小龙虾',
-    price: '25 / 斤',
-    description: '味道鲜美，是夏季热门美食，适合麻辣、十三香等口味。',
+    name: '河虾',
+    price1: '39 / 斤', 
+    price2: '71.28 / 斤',
+    description: '鲜香弹牙的河虾体验'
   },
   {
     image: p9,
-    name: '白鲢鱼',
-    price: '8 / 斤',
-    description: '价格实惠，可制作鱼丸、红烧等。',
+    name: '淡水小龙虾',
+    price1: '28.6 / 斤', 
+    price2: '52.27 / 斤',
+    description: '麻辣过瘾的小龙虾味'
   },
   {
     image: p10,
-    name: '鳙鱼（胖头鱼）',
-    price: '13 / 斤',
-    description: '鱼头大而鲜美，适合做鱼头汤、剁椒鱼头。',
+    name: '河蟹',
+    price1: '62.4 / 斤', 
+    price2: '114.05 / 斤',
+    description: '膏满黄肥的河蟹美味'
   },
+  {
+    image: p11,
+    name: '大闸蟹',
+    price1: '78 / 斤', 
+    price2: '142.56 / 斤',
+    description: '正宗鲜美的大闸蟹品'
+  },
+  {
+    image: p12,
+    name: '蛤蜊',
+    price1: '12.48 / 斤', 
+    price2: '22.81 / 斤',
+    description: '肉质肥美的蛤蜊佳肴'
+  },
+  {
+    image: p13,
+    name: '黄鳝',
+    price1: '36.4 / 斤', 
+    price2: '66.53 / 斤',
+    description: '滋补营养的黄鳝食材'
+  },
+  {
+    image: p14,
+    name: '泥鳅',
+    price1: '20.8 / 斤', 
+    price2: '38.02 / 斤',
+    description: '风味独特的泥鳅美食'
+  }
 ];
 
 

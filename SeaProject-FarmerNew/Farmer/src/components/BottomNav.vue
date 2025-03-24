@@ -1,15 +1,17 @@
 <template>
-  <div class="bottom-nav">
-    <div
-      v-for="(nav, index) in navList"
-      :key="index"
-      :class="['nav-item', { active: activeIndex === index }]"
-      @click="changeNav(nav.path)"
-    >
-      <div class="nav-icon">
-        <Icon :icon="nav.icon" width="2em" height="2em" />
+  <div v-if="shouldShow" class="bottom-nav">
+    <div class="bottom-nav">
+      <div
+        v-for="(nav, index) in navList"
+        :key="index"
+        :class="['nav-item', { active: activeIndex === index }]"
+        @click="changeNav(nav.path)"
+      >
+        <div class="nav-icon">
+          <Icon :icon="nav.icon" width="2em" height="2em" />
+        </div>
+        <div class="nav-text">{{ nav.text }}</div>
       </div>
-      <div class="nav-text">{{ nav.text }}</div>
     </div>
   </div>
 </template>
@@ -23,6 +25,11 @@ import { useUserStore } from '../stores/userStore'; // 引入全局状态
 const router = useRouter();
 const route = useRoute();
 const userStore = useUserStore();
+
+// 新增：判断是否显示底部导航
+const shouldShow = computed(() => {
+  return route.path !== '/mysettings'
+});
 
 // 根据 isCustomer 动态生成导航数据
 const navList = computed(() => {

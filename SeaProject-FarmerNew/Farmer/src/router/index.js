@@ -11,9 +11,18 @@ import c1 from '../views/c1.vue';
 import c2 from '../views/c2.vue';
 import c3 from '../views/c3.vue';
 import c4 from '../views/c4.vue';
+import MyCustomers from '../views/MyCustomers.vue';
+import CustomerOrders from '../views/CustomerOrders.vue';
+import PendingPayment from '../views/PendingPayment.vue';
+import PendingShipment from '../views/PendingShipment.vue';
+import PendingReceipt from '../views/PendingReceipt.vue';
+import PendingReview from '../views/PendingReview.vue';
+import RefundService from '../views/RefundService.vue';
+import MySettings from '../views/MySettings.vue';
 
 const routes = [
-  { path: '/', redirect: '/detection' },
+  { path: '/', redirect: '/mysettings' },
+  { path:'/mysettings',component: MySettings},
   { path: '/detection', component: DetectionView },
   { path: '/product', component: ProductView },
   { path: '/community', component: CommunityView },
@@ -40,7 +49,6 @@ const routes = [
     name: 'Reviews',
     component: () => import('../views/ReviewPage.vue')
   },
-  // router/index.js
   {
     path: '/cart',
     name: 'Cart',
@@ -60,6 +68,41 @@ const routes = [
   {path: '/c2',component: c2},
   {path: '/c3',component: c3},
   {path: '/c4',component: c4},
+  {
+    path: '/my-customers',
+    name: 'MyCustomers',
+    component: MyCustomers
+  },
+  {
+    path: '/customer-orders',
+    name: 'CustomerOrders',
+    component: CustomerOrders
+  },
+  {
+    path: '/pending-payment',
+    name: 'PendingPayment',
+    component: PendingPayment
+  },
+  {
+    path: '/pending-shipment',
+    name: 'PendingShipment',
+    component: PendingShipment
+  },
+  {
+    path: '/pending-receipt',
+    name: 'PendingReceipt',
+    component: PendingReceipt
+  },
+  {
+    path: '/pending-review',
+    name: 'PendingReview',
+    component: PendingReview
+  },
+  {
+    path: '/refund-service',
+    name: 'RefundService',
+    component: RefundService
+  }
 ];
 
 const router = createRouter({

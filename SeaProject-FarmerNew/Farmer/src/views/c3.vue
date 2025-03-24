@@ -58,7 +58,7 @@
 import { ref } from 'vue';
 import { Icon } from '@iconify/vue'; // 引入 Iconify 图标组件
 import {useRouter} from "vue-router";
-import p1 from '../assets/p (11).jpg'
+import p1 from '../assets/p (1).jpg'
 import p2 from '../assets/p (2).jpg'
 import p3 from '../assets/p (3).jpg'
 import p4 from '../assets/p (4).jpg'
@@ -68,7 +68,10 @@ import p7 from '../assets/p (7).jpg'
 import p8 from '../assets/p (8).jpg'
 import p9 from '../assets/p (9).jpg'
 import p10 from '../assets/p (10).jpg'
-import algae from "../assets/algae.png";
+import p11 from '../assets/p (11).jpg'
+import p12 from '../assets/p (12).jpg'
+import p13 from '../assets/p (13).jpg'
+import p14 from '../assets/p (14).jpg'
 
 const addToCart = () => {
     const btn = document.querySelector('.add-product-button')
@@ -80,81 +83,109 @@ const productList = ref([
   {
     id: 1,
     image: p1,
-    name: '大闸蟹',
-    price: '45 / 斤',
-    evaluation: '良好' // 手动指定为优秀
-  },
-  {
+    name: '草鱼',
+    price: '22.81 / 斤',
+    evaluation: '优秀'
+},
+{
     id: 2,
     image: p2,
-    name: '鲫鱼',
-    price: '15 / 斤',
-    evaluation: '优秀' // 手动指定为良好
-  },
-  {
+    name: '鲢鱼',
+    price: '17.1 / 斤',
+    evaluation: '良好'
+},
+{
     id: 3,
     image: p3,
-    name: '鲶鱼',
-    price: '18 / 斤',
-    evaluation: '优秀' // 手动指定为优秀
-  },
-  {
+    name: '鳙鱼',
+    price: '19.96 / 斤',
+    evaluation: '优秀'
+},
+{
     id: 4,
     image: p4,
-    name: '黄鳝',
-    price: '30 / 斤',
-    evaluation: '良好' // 手动指定为良好
-  },
-  {
+    name: '鲤鱼',
+    price: '25.67 / 斤',
+    evaluation: '优秀'
+},
+{
     id: 5,
     image: p5,
-    name: '中华草龟',
-    price: '50 / 只',
-    evaluation: '优秀' // 手动指定为优秀
-  },
-  {
+    name: '鲫鱼',
+    price: '28.51 / 斤',
+    evaluation: '优秀'
+},
+{
     id: 6,
-    image: algae,
-    name: '小球藻',
-    price: '20 / 斤',
-    evaluation: '优秀' // 手动指定为良好
-  },
-  {
+    image: p6,
+    name: '鲶鱼',
+    price: '26.57 / 斤',
+    evaluation: '良好'
+},
+{
     id: 7,
     image: p7,
-    name: '福寿螺（食用级）',
-    price: '8 / 斤',
-    evaluation: '优秀' // 手动指定为优秀
-  },
-  {
+    name: '青虾',
+    price: '57.02 / 斤',
+    evaluation: '优秀'
+},
+{
     id: 8,
     image: p8,
-    name: '淡水小龙虾',
-    price: '25 / 斤',
-    evaluation: '优秀' // 手动指定为良好
-  },
-  {
+    name: '河虾',
+    price: '71.28 / 斤',
+    evaluation: '优秀'
+},
+{
     id: 9,
     image: p9,
-    name: '白鲢鱼',
-    price: '8 / 斤',
-    evaluation: '优秀' // 手动指定为优秀
-  },
-  {
+    name: '淡水小龙虾',
+    price: '52.27 / 斤',
+    evaluation: '优秀'
+},
+{
     id: 10,
     image: p10,
-    name: '鳙鱼（胖头鱼）',
-    price: '13 / 斤',
-    evaluation: '良好' // 手动指定为良好
-  }
-]);
+    name: '河蟹',
+    price: '114.05 / 斤',
+    evaluation: '优秀'
+},
+{
+    id: 11,
+    image: p11,
+    name: '大闸蟹',
+    price: '142.56 / 斤',
+    evaluation: '优秀'
+},
+{
+    id: 12,
+    image: p12,
+    name: '蛤蜊',
+    price: '22.81 / 斤',
+    evaluation: '良好'
+},
+{
+    id: 13,
+    image: p13,
+    name: '黄鳝',
+    price: '66.53 / 斤',
+    evaluation: '优秀'
+},
+{
+    id: 14,
+    image: p14,
+    name: '泥鳅',
+    price: '38.02 / 斤',
+    evaluation: '良好'
+}
+  ]);
 const filteredProductList = ref(productList.value);
 
 // 过滤商品列表
 const filterProducts = () => {
   let query = searchQuery.value.toLowerCase();
   if (query === '') {
-    query = '螺';
+    query = '蛤蜊';
   }
   filteredProductList.value = productList.value.filter((product) => {
     const name = product.name.toLowerCase();

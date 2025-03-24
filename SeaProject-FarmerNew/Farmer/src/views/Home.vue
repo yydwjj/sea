@@ -13,6 +13,37 @@
       </div>
     </section>
 
+    <!-- 位置选择栏 -->
+    <section class="location-section">
+      <div class="location-selector" @click="showLocationPicker = true">
+        <div class="location-icon">
+          <Icon icon="mdi:map-marker" width="1.5em" />
+        </div>
+        <div class="location-text">
+          {{ currentLocation || '请选择店铺' }}
+        </div>
+      </div>
+    </section>
+
+    <!-- 店铺选择弹窗 -->
+    <div v-if="showLocationPicker" class="location-picker-overlay" @click.self="showLocationPicker = false">
+      <div class="location-picker">
+        <h3>选择店铺</h3>
+        <div class="location-options">
+          <div
+            v-for="(location, index) in locationOptions"
+            :key="index"
+            class="location-option"
+            :class="{ disabled: location.disabled }"
+            @click="selectLocation(location)"
+          >
+            {{ location.name }}
+            <span v-if="location.disabled" class="hint"></span>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <!-- 轮播图部分 -->
     <section class="carousel-section">
       <Swiper
@@ -66,27 +97,29 @@ import { Autoplay ,Pagination } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/pagination'
 import { useRouter, useRoute } from 'vue-router';
+import { ref } from 'vue';
+import { Icon } from '@iconify/vue';
 
 import fish from '../assets/p (1).jpg'
-import shellfish from '../assets/p (5).jpg'
-import clam from '../assets/p (7).jpg'
-import algae from '../assets/algae.png'
+import shellfish from '../assets/p (7).jpg'
+import clam from '../assets/p (12).jpg'
+import algae from '../assets/p (14).jpg'
 import l1 from '../assets/l (1).jpg'
 import l2 from '../assets/l (2).jpg'
 import l3 from '../assets/l (3).jpg'
 
 
 const carouselImages = [
-  { src: l1, alt: '轮播图1', targetId: 1 },
-  { src: l2, alt: '轮播图2', targetId: 2 },
-  { src: l3, alt: '轮播图3', targetId: 8 }
+  { src: l1, alt: '轮播图1', targetId: 11 },
+  { src: l2, alt: '轮播图2', targetId: 1 },
+  { src: l3, alt: '轮播图3', targetId: 9 }
 ]
 
 const categories = [
   { name: '鱼类' ,img :fish },
-  { name: '甲壳类', img :shellfish},
+  { name: '虾蟹类', img :shellfish},
   { name: '贝类', img : clam},
-  { name: '藻类', img : algae}
+  { name: '其他类', img : algae}
 ];
 
 const router = useRouter();
@@ -94,9 +127,9 @@ const router = useRouter();
 const goToPurchase = (category) => {
   const routeMap = {
     '鱼类': '/c1',
-    '甲壳类': '/c2',
+    '虾蟹类': '/c2',
     '贝类': '/c3',
-    '藻类': '/c4'
+    '其他类': '/c4'
   };
 
   if (routeMap[category.name]) {
@@ -117,6 +150,26 @@ const gotoProduct = (index) => {
     }
   })
 }
+
+const showLocationPicker = ref(false);
+const currentLocation = ref('');
+
+const locationOptions = ref([
+  { name: '未选择', value: '' },
+  { name: '渔乐水产', value: '渔乐水产' },
+  { name: '品鲜', value: '品鲜' },
+  { name: '舌尖水产', value: '舌尖水产', disabled: true },
+  { name: '玖九鲜', value: '玖九鲜', disabled: true }
+]);
+
+const selectLocation = (location) => {
+  if (location.disabled) {
+    alert('距离超出配送范围');
+    return;
+  }
+  currentLocation.value = location.value;
+  showLocationPicker.value = false;
+};
 
 </script>
 
@@ -260,14 +313,15 @@ const gotoProduct = (index) => {
 }
 
 .category-image img {
-  width: 60px;
-  height: 100%;
+  width: 57px;
+  height: 97%;
 }
 
 .category-name {
   color: rgb(50, 110, 161);
-  font-size: 16px;
+  font-size: 14px;
   font-weight: 600;
+  white-space: nowrap;
 }
 
 /* 响应式设计 */
@@ -283,5 +337,82 @@ const gotoProduct = (index) => {
   .category-grid {
     gap: 20px;
   }
+}
+.location-section {
+  margin: 20px 0;
+  padding: 0 16px;
+}
+
+.location-selector {
+  display: flex;
+  align-items: center;
+  padding: 12px;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+}
+
+.location-icon {
+  color: #50b7eb;
+  margin-right: 8px;
+}
+
+.location-text {
+  flex: 1;
+  color: #7f8c8d;
+}
+
+.location-picker-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.location-picker {
+  background: #fffffff0;
+  width: 80%;
+  max-width: 400px;
+  border-radius: 8px;
+  padding: 20px;
+}
+
+.location-picker h3 {
+  margin-bottom: 16px;
+  color: #2c3e50;
+}
+
+.location-options {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.location-option {
+  padding: 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.location-option:not(.disabled):hover {
+  background: #f5f5f5;
+}
+
+.location-option.disabled {
+  color: #bdbdbd;
+  cursor: not-allowed;
+}
+
+.hint {
+  font-size: 0.8em;
+  color: #f44336;
 }
 </style>

@@ -5,7 +5,9 @@
       <button class="history-button" @click="showHistory =!showHistory">历史记录</button>
     </div>
     <div v-if="!showHistory" class="video-list">
-      <img src="../assets/inspection.jpg" alt="专检" />
+      <img src="../assets/inspect1.jpg" alt="专检" />
+      <img src="../assets/inspect2.png" alt="专检" />
+      <img src="../assets/inspect3.png" alt="专检" />
     </div>
     <div v-if="showHistory" class="history-content">
       <!-- 这里可以进一步添加历史记录的具体展示逻辑，目前只是简单占位 -->
@@ -21,7 +23,7 @@ import { ref, onMounted } from 'vue';
 import { getTestData } from '../api.js';
 
 // 当前日期
-const currentDate = ref('2025/2/16');
+const currentDate = ref('2025/3/4');
 // 是否显示历史记录
 const showHistory = ref(false);
 // 存储 API 数据

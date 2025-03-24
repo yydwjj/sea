@@ -1,17 +1,5 @@
 <template>
     <div class="detection-page">
-      <!-- 搜索框 -->
-<!--      <div class="search-box">-->
-<!--        <div class="search-icon">-->
-<!--          <Icon icon="mdi:magnify" />-->
-<!--        </div>-->
-<!--        <input-->
-<!--          type="text"-->
-<!--          class="search-input"-->
-<!--          placeholder=""-->
-<!--        />-->
-<!--      </div>-->
-  
       <!-- 标签切换区域 -->
       <div class="tab-container">
         <div
