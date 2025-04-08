@@ -1,24 +1,26 @@
 import { createRouter, createWebHistory } from 'vue-router';
 import DetectionView from '../views/DetectionView.vue';
-import ProductView from '../views/ProductView.vue';
-import CommunityView from '../views/CommunityView.vue';
-import ProfileView from '../views/ProfileView.vue';
-import PurchaseView from '../views/PurchaseView.vue';
-import ProductDetail from '../views/PurchaseDetail.vue'; // 假设商品详情页组件路径，按需修改
+import ProductView from '../views/Product/ProductView.vue';
+import CommunityView from '../views/social/CommunityView.vue';
+import ProfileView from '../views/Product/ProfileView.vue';
+import PurchaseView from '../views/Product/PurchaseView.vue';
+import ProductDetail from '../views/Product/PurchaseDetail.vue'; // 假设商品详情页组件路径，按需修改
 import DataView2C from '../views/DataView2C.vue';
 import Home from '../views/Home.vue';
-import c1 from '../views/c1.vue';
-import c2 from '../views/c2.vue';
-import c3 from '../views/c3.vue';
-import c4 from '../views/c4.vue';
-import MyCustomers from '../views/MyCustomers.vue';
-import CustomerOrders from '../views/CustomerOrders.vue';
-import PendingPayment from '../views/PendingPayment.vue';
-import PendingShipment from '../views/PendingShipment.vue';
-import PendingReceipt from '../views/PendingReceipt.vue';
-import PendingReview from '../views/PendingReview.vue';
-import RefundService from '../views/RefundService.vue';
-import MySettings from '../views/MySettings.vue';
+import c1 from '../views/Product/c1.vue';
+import c2 from '../views/Product/c2.vue';
+import c3 from '../views/Product/c3.vue';
+import c4 from '../views/Product/c4.vue';
+import MyCustomers from '../views/settingsSonPage/MyCustomers.vue';
+import CustomerOrders from '../views/settingsSonPage/CustomerOrders.vue';
+import PendingPayment from '../views/settingsSonPage/PendingPayment.vue';
+import PendingShipment from '../views/settingsSonPage/PendingShipment.vue';
+import PendingReceipt from '../views/settingsSonPage/PendingReceipt.vue';
+import PendingReview from '../views/settingsSonPage/PendingReview.vue';
+import RefundService from '../views/settingsSonPage/RefundService.vue';
+import MySettings from '../views/settingsSonPage/MySettings.vue';
+import DeviceManage from '../views/settingsSonPage/DeviceManage.vue';
+import DeviceSettings from '../views/settingsSonPage/DeviceSettings.vue';
 
 const routes = [
   { path: '/', redirect: '/mysettings' },
@@ -26,8 +28,11 @@ const routes = [
   { path: '/detection', component: DetectionView },
   { path: '/product', component: ProductView },
   { path: '/community', component: CommunityView },
-  { path: '/profile', component: ProfileView },
-  { path: '/post/:id',  name: 'PostDetail', component: () => import('../views/PostDetail.vue') },
+  { path: '/profile', 
+    component: ProfileView ,
+    name: 'Profile'
+  },
+  { path: '/post/:id',  name: 'PostDetail', component: () => import('../views/social/PostDetail.vue') },
   { path: '/purchase', component: PurchaseView },
   {
     path: '/product/:id',
@@ -41,28 +46,28 @@ const routes = [
   {
     path: '/chat',
     name: 'Chat',
-    component: () => import('../views/ChatView.vue') // 新建的聊天组件
+    component: () => import('../views/social/ChatView.vue') // 新建的聊天组件
   },
   { path:'/home',component: Home},
   {
     path: '/reviews/:productId',
     name: 'Reviews',
-    component: () => import('../views/ReviewPage.vue')
+    component: () => import('../views/Product/ReviewPage.vue')
   },
   {
     path: '/cart',
     name: 'Cart',
-    component: () => import('../views/CartView.vue')
+    component: () => import('../views/buy/CartView.vue')
   },
   {
     path: '/checkout',
     name: 'Checkout',
-    component: () => import('../views/CheckoutView.vue')
+    component: () => import('../views/buy/CheckoutView.vue')
   },
   {
     path: '/order-result',
     name: 'OrderResult',
-    component: () => import('../views/OrderResult.vue')
+    component: () => import('../views/buy/OrderResult.vue')
   },
   {path: '/c1',component: c1},
   {path: '/c2',component: c2},
@@ -102,6 +107,17 @@ const routes = [
     path: '/refund-service',
     name: 'RefundService',
     component: RefundService
+  },
+  {
+    path: '/my-devices',
+    name: 'MyDevices',
+    component: DeviceManage
+  },
+  {
+    path: '/settings/:id',
+    name: 'DeviceSettings',
+    component: DeviceSettings,
+    props: true
   }
 ];
 
