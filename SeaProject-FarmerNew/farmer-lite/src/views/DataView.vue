@@ -353,7 +353,7 @@ const callRealDeepSeekApi = async () => {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': `Bearer sk-4bf9825a694542e29b2a0ba368e0cf1d`
+        'Authorization': `Bearer `
       },
       body: JSON.stringify({
         model: "deepseek-chat", // 根据API文档指定模型
