@@ -9,7 +9,7 @@
     <div v-if="!showHistory" class="video-list">
       <div v-for="(video, index) in videos" :key="index" class="video-item">
         <span class="video-name">水域{{ index + 1 }}</span>
-        <video :src="video.src" alt="水域视频" class="video-img" controls autoplay/>
+        <video :src="video.src" alt="水域视频" class="video-img" autoplay/>
 
         <!-- <div class="video-wrapper">
           <video 

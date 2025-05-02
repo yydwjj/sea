@@ -9,9 +9,15 @@
     </div>
     <div class="setting-option" @click="switchToWholesaler">
       <div class="option-icon">
+        <Icon icon="mdi:shop" />
+      </div>
+      <div class="option-label">切换到直营店/加盟商端</div>
+    </div>
+    <div class="setting-option" @click="switchToWholesaler2">
+      <div class="option-icon">
         <Icon icon="mdi:briefcase" />
       </div>
-      <div class="option-label">切换到渠道商端</div>
+      <div class="option-label">切换到批发商端</div>
     </div>
     <div class="setting-option" @click="switchToFamer">
       <div class="option-icon">
@@ -38,16 +44,22 @@ const switchToCustomer = () => {
 
 const switchToWholesaler = () => {
   userStore.switchToWholesaler();
-  console.log('已切换到渠道商端');
-  window.alert("本程序为演示程序，实际渠道商端需审核通过后才可进入")
+  console.log('已切换到直营店/加盟商端');
+  window.alert("本程序为演示程序，实际直营店/加盟商端需审核通过后才可进入")
   router.push('/purchase'); // 跳转到/purchase
 };
+
+const switchToWholesaler2 = () => {
+  userStore.switchToWholesalers2();
+  console.log('已切换到批发商端');
+  window.alert("本程序为演示程序，实际批发端需审核通过后才可进入")
+  router.push('/home'); // 跳转到/purchase
+}
 
 const switchToFamer = () =>{
   userStore.switchToFamer();
   window.alert("本程序为演示程序，实际养殖户端需审核通过后才可进入")
   router.push('/detection'); // 跳转到/detection
-
 }
 </script>
 
