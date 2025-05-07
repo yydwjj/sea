@@ -65,10 +65,6 @@ const routes = [
     name: 'OrderResult',
     component: () => import('../views/buy/OrderResult.vue')
   },
-  {path: '/c1',component: c1},
-  {path: '/c2',component: c2},
-  {path: '/c3',component: c3},
-  {path: '/c4',component: c4},
   {
     path: '/my-customers',
     name: 'MyCustomers',

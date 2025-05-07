@@ -226,16 +226,6 @@ const fetchRecommendations = () => {
           reason: '品质稳定，性价比高',
           trendData: [50, 55, 50, 52, 50]
         },
-        {
-          type: '青虾',
-          currentPrice: '57.02 / 斤',
-          originalPrice: '71.28 / 斤',
-          trend: '特惠促销',
-          discount: '限时8折优惠',
-          reason: '新货上市促销活动',
-          trendData: [100, 90, 85, 80, 80],
-          isSpecialOffer: true
-        }
       ];
     }
     isLoading.value = false;

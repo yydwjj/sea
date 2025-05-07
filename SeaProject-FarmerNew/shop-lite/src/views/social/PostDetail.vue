@@ -25,7 +25,7 @@ import p6 from '../../assets/p6.jpg';
 import p7 from '../../assets/p7.jpg';
 import p8 from '../../assets/p8.jpg';
 import p9 from '../../assets/p9.jpg';
-import p10 from '../../assets/p10.jpg';
+import p10 from '../../assets/p4.jpg';
 
 const route = useRoute();
 const router = useRouter();
@@ -132,7 +132,7 @@ onMounted(() => {
     border-radius: 20px;
     cursor: pointer;
     /* font-size: 18px; */
-    transition: background-color 0.3sease-in-out;
+    transition: background-color;
 }
 
 .back-button:hover {

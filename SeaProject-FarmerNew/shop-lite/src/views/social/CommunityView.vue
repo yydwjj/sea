@@ -54,7 +54,7 @@ import p6 from '../../assets/p6.jpg';
 import p7 from '../../assets/p7.jpg';
 import p8 from '../../assets/p8.jpg';
 import p9 from '../../assets/p9.jpg';
-import p10 from '../../assets/p10.jpg';
+import p10 from '../../assets/p4.jpg';
 
 const router = useRouter();
 

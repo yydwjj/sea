@@ -127,10 +127,10 @@ const listedProducts = [
   },
   {
     image: p2,
-    name: '鲢鱼',
+    name: '鲈鱼',
     price1: '9.36 / 斤',
     price2: '17.1 / 斤',
-    description: '美味实惠的鲢鱼选择'
+    description: '美味实惠的鲈鱼选择'
   },
   {
     image: p3,

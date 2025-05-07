@@ -18,7 +18,7 @@ const productList = [
   {
     id: 1,
     image: p1,
-    name: '草鱼',
+    name: '鳜鱼',
     price: '22.81 / 斤',
     evaluation: '优秀'
 },
